@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 #include "Controller.h"
-#include "Employee.h"
+#include "perrito.h"
 
 /****************************************************
     Menu:

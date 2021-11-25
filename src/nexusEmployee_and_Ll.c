@@ -8,45 +8,45 @@
 #include "nexusEmployee_and_Ll.h"
 
 /**
- * @fn int nexusEmployee_and_Ll_findEmployeeByID(LinkedList*)
- * @brief Para retorna el indice del linkedlist donde se encuentra el empleado con el id ingresado por parametro(si existe).
+ * @fn int nexusPerrito_and_Ll_findPerritoByID(LinkedList*)
+ * @brief Para retorna el indice del linkedlist donde se encuentra el perrito con el id ingresado por parametro(si existe).
  *
  * @param this LinkedList*
  * @param id int
- * @return Retorna -1 si no encuentra un empleado registrado con el id ingresado (o parametro this NULL). Caso contrario retorna el indice en el que se encuentra el empleado con ese id dentro del LinkedList.
+ * @return Retorna -1 si no encuentra un perrito registrado con el id ingresado (o parametro this NULL). Caso contrario retorna el indice en el que se encuentra el perrito con ese id dentro del LinkedList.
  */
-int nexusEmployee_and_Ll_findEmployeeByID(LinkedList* this, int id)
+int nexusPerrito_and_Ll_findPerritoByID(LinkedList* this, int id)
 {
-	int indexEmpleado = -1;
-	int tamListEmployee = -1;
+	int indexPerrito = -1;
+	int tamList = -1;
 
 	if(this != NULL)
 	{
-		tamListEmployee = ll_len(this);
-		for(int j =0; j< tamListEmployee; j++)
+		tamList = ll_len(this);
+		for(int j =0; j< tamList; j++)
 		{
-			Employee* pEmpleadoABuscar = ll_get(this, j);
+			perrito* pPerritoABuscar = ll_get(this, j);
 
-			if(pEmpleadoABuscar->id == id)
+			if(pPerritoABuscar->id == id)
 			{
-				indexEmpleado = j;
+				indexPerrito = j;
 				break;
 			}
-			pEmpleadoABuscar = NULL;
+			pPerritoABuscar = NULL;
 		}
 	}
 
-	return indexEmpleado;
+	return indexPerrito;
 }
 
 /**
- * @fn int nexusEmployee_and_Ll_findLastID(LinkedList* this)
- * @brief Para retornar el ultimo id que se encuentra en el LinkedList (del ultimo empleado)
+ * @fn int nexusPerrito_and_Ll_findLastID(LinkedList* this)
+ * @brief Para retornar el ultimo id que se encuentra en el LinkedList (del ultimo perrito registrado)
  *
  * @param this LinkedList*
- * @return Retorna -1 si el LinkedList está vacio (NULL) o no encuentra ultimo ID. Caso contrario retorna el ultimo ID escrito en la lista.
+ * @return Retorna -1 si el LinkedList está vacio (NULL) o no encuentra ultimo ID. Caso contrario retorna el mayor ID escrito en la lista.
  */
-int nexusEmployee_and_Ll_findLastID(LinkedList* this)
+int nexusPerrito_and_Ll_findLastID(LinkedList* this)
 {
 	int ultimoID;
 	int tamList;
@@ -58,10 +58,10 @@ int nexusEmployee_and_Ll_findLastID(LinkedList* this)
 		tamList = ll_len(this);
 		for(int i=0; i<tamList; i++)
 		{
-			Employee* pEmpleado = ll_get(this, i);
-			if(pEmpleado != NULL)
+			perrito* pPerrito = ll_get(this, i);
+			if(pPerrito != NULL)
 			{
-				employee_getId(pEmpleado, &ultimoID);
+				perrito_getId(pPerrito, &ultimoID);
 			}
 
 			if(i==0 || ultimoID > mayorId)
@@ -75,37 +75,37 @@ int nexusEmployee_and_Ll_findLastID(LinkedList* this)
 }
 
 /**
- * @fn Employee* nexusEmployee_and_Ll_getEmployees(LinkedList* this)
- * @brief Para retornar un puntero a empleados que contenga los empleados que posee el linkedlist
+ * @fn perrito* nexusPerrito_and_Ll_getPerritos(LinkedList* this)
+ * @brief Para retornar un puntero a perritos que contenga los perritos que posee el linkedlist
  *
  * @param this LinkedList*
- * @return Retorna un puntero empleados cargado con los empleados del linkedlist (si el linkedList esta vacio retorna un puntero vacio)
+ * @return Retorna un puntero perrito cargado con los perritos del linkedlist (si el linkedList esta vacio retorna un puntero vacio)
  */
-Employee* nexusEmployee_and_Ll_getEmployees(LinkedList* this)
+perrito* nexusPerrito_and_Ll_getPerritos(LinkedList* this)
 {
 	int tamLinkedList;
 	int i;
 
 	tamLinkedList = ll_len(this);
-	Employee* pEmpleadosRetorno = NULL;
+	perrito* pPerritosRetorno = NULL;
 
 	if(this != NULL)
 	{
-		Employee* pEmpleados = NULL;
-		pEmpleados = (Employee*) malloc(sizeof(Employee)*tamLinkedList);
+		perrito* pPerritos = NULL;
+		pPerritos = (perrito*) malloc(sizeof(perrito)*tamLinkedList);
 
 		for(i=0; i<tamLinkedList; i++)
 		{
-			Employee* pEmpleado = ll_get(this, i);
-			if(pEmpleado != NULL)
+			perrito* pPerrito = ll_get(this, i);
+			if(pPerrito != NULL)
 			{
-				*(pEmpleados + i) = *pEmpleado;
+				*(pPerritos + i) = *pPerrito;
 			}
-			pEmpleado = NULL;
+			pPerrito = NULL;
 		}
-		pEmpleadosRetorno = pEmpleados;
+		pPerritosRetorno = pPerritos;
 	}
-	return pEmpleadosRetorno;
+	return pPerritosRetorno;
 }
 
 

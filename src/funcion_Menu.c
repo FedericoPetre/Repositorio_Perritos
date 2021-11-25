@@ -60,7 +60,7 @@ void funcionMenu(void)
             	}
             	else
             	{
-            		if(controller_addEmployee(listaPerritos) == 0)
+            		if(controller_addPerrito(listaPerritos) == 0)
             		{
             			printf("perrito dado de alta con exito\n");
             			flagCambiarionDatos = 1;
@@ -81,7 +81,7 @@ void funcionMenu(void)
             	}
             	else
             	{
-            		controller_editEmployee(listaPerritos);
+            		controller_editPerrito(listaPerritos);
             		flagCambiarionDatos = 1;
             	}
                 break;
@@ -89,7 +89,7 @@ void funcionMenu(void)
             	printf("Elejiste la opcion 5-Baja de perrito\n");
             	if(banderaPerritosModoTexto == 1 || banderaPerritosModoBinario == 1)
             	{
-            		controller_removeEmployee(listaPerritos);
+            		controller_removePerrito(listaPerritos);
             		cantidadPerritos--;
             		flagCambiarionDatos = 1;
             	}
@@ -103,7 +103,7 @@ void funcionMenu(void)
             	if((banderaPerritosModoTexto == 1 && cantidadPerritos != 0)|| (banderaPerritosModoBinario == 1 && cantidadPerritos != 0))
             	{
             		printf("Mostrando lista de perritos...\n");
-                	controller_ListEmployee(listaPerritos);
+            		controller_ListPerrito(listaPerritos);
             	}
             	else
             	{
@@ -118,7 +118,7 @@ void funcionMenu(void)
             	}
             	else
             	{
-            		controller_sortEmployee(listaPerritos);
+            		controller_sortPerritos(listaPerritos);
             		flagCambiarionDatos = 1;
             	}
 

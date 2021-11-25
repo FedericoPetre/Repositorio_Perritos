@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "funcion_Menu.h"
 
 int main(void) {
 	setbuf(stdout, NULL);

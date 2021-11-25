@@ -19,7 +19,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPerrito)
 
 	if(pFile != NULL && pArrayListPerrito != NULL)
 	{
-		retornoParser = parser_EmployeeFromText(pFile , pArrayListPerrito);
+		retornoParser = parser_PerritoFromText(pFile , pArrayListPerrito);
 	}
 
 	fclose(pFile);
@@ -53,7 +53,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPerrito)
 
 	if(pFile != NULL && pArrayListPerrito != NULL)
 	{
-		retorno = parser_EmployeeFromBinary(pFile, pArrayListPerrito);
+		retorno = parser_PerritoFromBinary(pFile, pArrayListPerrito);
 	}
 	fclose(pFile);
 
@@ -91,7 +91,7 @@ int controller_addPerrito(LinkedList* pArrayListPerrito)
 
 	if(pArrayListPerrito != NULL)
 	{
-		ultimoID = nexusEmployee_and_Ll_findLastID(pArrayListPerrito);
+		ultimoID = nexusPerrito_and_Ll_findLastID(pArrayListPerrito);
 		nuevoID = ultimoID + 1;
 		itoa(nuevoID, nuevoIDTransformado, 10);
 
@@ -105,7 +105,7 @@ int controller_addPerrito(LinkedList* pArrayListPerrito)
 		pNuevoPerrito = perrito_nuevoParametros(nuevoIDTransformado, nombrePerrito, edadTransformada, razaPerrito);
 
 		printf("Mostrando nuevo perrito:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
-		employee_showEmpleado(pNuevoPerrito);
+		perrito_mostrarPerrito(pNuevoPerrito);
 		funciones_imput_pedirYValidarCaracter("Desea agregar este perrito al sistema? (s: si, n: no)\n", "Error, esta seguro de agregar este perrito al sistema? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
 		if(*letraRespuesta == 's')
 		{
@@ -145,7 +145,7 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 
 	funciones_imput_pedirYValidarEntero("Ingrese el id del perrito a modificar datos", "Error, ingrese el id del perrito a modificar datos (solo numeros)", 1, 999999, pNumeroPedido);
 
-	indexPerrito = nexusEmployee_and_Ll_findEmployeeByID(pArrayListPerrito, *pNumeroPedido);
+	indexPerrito = nexusPerrito_and_Ll_findPerritoByID(pArrayListPerrito, *pNumeroPedido);
 
 		if(indexPerrito != -1)
 		{
@@ -183,7 +183,7 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 			case 2:
 				printf("Elejiste modificar edad del perrito\n");
 				funciones_imput_pedirYValidarEntero("Ingrese nueva edad del perrito (min: 0 max: 50)\n","Error. reingrese nueva edad (min: 0 max: 50)\n", 0, 50, edadAux);
-				employee_setHorasTrabajadas(pPerritoAux,*edadAux);
+				perrito_setEdad(pPerritoAux,*edadAux);
 				printf("Mostrando Datos modificados:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 				perrito_mostrarPerrito(pPerritoAux);
 				funciones_imput_pedirYValidarCaracter("Desea guardar la modificacion? (s: si, n: no)\n", "Error, desea guardar la modificacion anterior al perrito? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
@@ -253,7 +253,7 @@ int controller_removePerrito(LinkedList* pArrayListPerrito)
 	{
 		funciones_imput_pedirYValidarEntero("Ingrese el id del perrito a eliminar del sistema\n", "Error, reingrese el id del perrito a eliminar del sistema\n", 1, 999999, idPerrito);
 
-		indexPerrito = nexusEmployee_and_Ll_findEmployeeByID(pArrayListPerrito, *idPerrito);
+		indexPerrito = nexusPerrito_and_Ll_findPerritoByID(pArrayListPerrito, *idPerrito);
 
 		if(indexPerrito != -1)
 		{
@@ -261,7 +261,7 @@ int controller_removePerrito(LinkedList* pArrayListPerrito)
 			pPerritoBuscado = ll_get(pArrayListPerrito, indexPerrito);
 
 			printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
-			employee_showEmpleado(pPerritoBuscado);
+			perrito_mostrarPerrito(pPerritoBuscado);
 
 			funciones_imput_pedirYValidarCaracter("Esta seguro que desea eliminar este perrito del sistema? (s: si, n: no)\n", "Error, esta seguro que desea eliminar este perrito del sistema? (s: si, n: no) (ingrese una de las dos letras)\n", respuesta);
 
@@ -301,7 +301,7 @@ int controller_ListPerrito(LinkedList* pArrayListPerrito)
 
 	if(pArrayListPerrito != NULL && tamArrayPerritos > 0)
 	{
-		pPerritos = nexusEmployee_and_Ll_getEmployees(pArrayListPerrito);
+		pPerritos = nexusPerrito_and_Ll_getPerritos(pArrayListPerrito);
 
 		for(int j=0; j<tamArrayPerritos; j++)
 		{

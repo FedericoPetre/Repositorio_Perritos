@@ -9,9 +9,10 @@
 #define PERRITO_H_
 
 #include <stdlib.h>
-#include <studio.h>
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "funciones_imput.h"
 
 typedef struct{
 	int id;
