@@ -6,7 +6,7 @@
 #include "LinkedList.h"
 #include "perrito.h"
 #include "funciones_imput.h"
-#include "nexusEmployee_and_Ll.h"
+#include "nexusPerrito_and_Ll.h"
 
 
 int controller_loadFromText(char* path , LinkedList* pArrayListPerrito);
