@@ -1,36 +1,36 @@
 #include "parser.h"
 
-/** \brief Parsea los datos de los empleados desde el archivo data.csv (modo texto).
+/** \brief Parsea los datos de los perritos desde el archivo data.csv (modo texto).
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
+int parser_PerritoFromText(FILE* pFile , LinkedList* pArrayListPerrito)
 {
 	int estado = 1;
 
 	char id[20];
 	char nombre[30];
-	char horasTrabajadas[20];
-	char sueldo[20];
+	char edad[20];
+	char raza[30];
 
 	if(pFile != NULL)
 	{
-		fscanf(pFile,"%[^,] , %[^,] , %[^,] , %[^\n]", id, nombre, horasTrabajadas, sueldo);
+		fscanf(pFile,"%[^,] , %[^,] , %[^,] , %[^\n]", id, nombre, edad, raza);
 		while(!feof(pFile))
 		{
-			fscanf(pFile,"%[^,] , %[^,] , %[^,] , %[^\n]", id, nombre, horasTrabajadas, sueldo);
+			fscanf(pFile,"%[^,] , %[^,] , %[^,] , %[^\n]", id, nombre, edad, raza);
 			if(feof(pFile) != 0)
 			{
 				break;
 			}
 
-			Employee* empleado = employee_newParametros(id, nombre, horasTrabajadas, sueldo);
+			perrito* pPerrito = perrito_nuevoParametros(id, nombre, edad, raza);
 
-			ll_add(pArrayListEmployee, empleado);
-			empleado = NULL;
+			ll_add(pArrayListPerrito, pPerrito);
+			pPerrito = NULL;
 		}
 		estado = 0;
 		fclose(pFile);
@@ -39,14 +39,14 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	return estado;
 }
 
-/** \brief Parsea los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Parsea los datos de los perritos desde el archivo data.csv (modo binario).
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
  */
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
+int parser_PerritoFromBinary(FILE* pFile , LinkedList* pArrayListPerrito)
 {
 	int estado = 1;
 
@@ -54,14 +54,14 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 	{
 		while(!feof(pFile))
 		{
-			Employee* punteroAEmpleado = employee_new();
-			fread(punteroAEmpleado, sizeof(Employee), 1, pFile);
+			perrito* punteroAPerrito = nuevo_perrito();
+			fread(punteroAPerrito, sizeof(perrito), 1, pFile);
 
 			if(feof(pFile) == 0)
 			{
-				ll_add(pArrayListEmployee, punteroAEmpleado);
+				ll_add(pArrayListPerrito, punteroAPerrito);
 			}
-			punteroAEmpleado = NULL;
+			punteroAPerrito = NULL;
 		}
 		estado = 0;
 		fclose(pFile);

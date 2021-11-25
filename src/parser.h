@@ -11,10 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
-#include "Employee.h"
+#include "perrito.h"
 
-int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee);
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee);
+int parser_PerritoFromText(FILE* pFile , LinkedList* pArrayListPerrito);
+int parser_PerritoFromBinary(FILE* pFile , LinkedList* pArrayListPerrito);
 
 
 

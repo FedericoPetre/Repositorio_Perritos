@@ -5,7 +5,7 @@
 /** \brief Carga los datos de los perritos desde el archivo data.csv (modo texto).
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
@@ -37,10 +37,10 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPerrito)
     return estado;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los perritos desde el archivo data.csv (modo binario).
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
@@ -69,7 +69,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPerrito)
 /** \brief Alta de perritos
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
@@ -121,10 +121,10 @@ int controller_addPerrito(LinkedList* pArrayListPerrito)
     return retorno;
 }
 
-/** \brief Modificar datos de empleado
+/** \brief Modificar datos de perrito
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
@@ -232,98 +232,98 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 
 
 
-/** \brief Baja de empleado
+/** \brief Baja de perrito
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int controller_removeEmployee(LinkedList* pArrayListEmployee)
+int controller_removePerrito(LinkedList* pArrayListPerrito)
 {
-	int* idEmpleado = (int*)malloc(sizeof(int));
-	int indexEmpleado;
+	int* idPerrito = (int*)malloc(sizeof(int));
+	int indexPerrito;
 	int retorno = 1;
 
 	char* respuesta = (char*)malloc(sizeof(char));
 
 	perrito* pPerritoBuscado = NULL;
 
-	if(pArrayListEmployee != NULL)
+	if(pArrayListPerrito != NULL)
 	{
-		funciones_imput_pedirYValidarEntero("Ingrese el id del empleado a eliminar del sistema\n", "Error, reingrese el id del empleado a eliminar del sistema\n", 1, 999999, idEmpleado);
+		funciones_imput_pedirYValidarEntero("Ingrese el id del perrito a eliminar del sistema\n", "Error, reingrese el id del perrito a eliminar del sistema\n", 1, 999999, idPerrito);
 
-		indexEmpleado = nexusEmployee_and_Ll_findEmployeeByID(pArrayListEmployee, *idEmpleado);
+		indexPerrito = nexusEmployee_and_Ll_findEmployeeByID(pArrayListPerrito, *idPerrito);
 
-		if(indexEmpleado != -1)
+		if(indexPerrito != -1)
 		{
-			printf("Empleado encontrado\n");
-			pEmpleadoBuscado = ll_get(pArrayListEmployee, indexEmpleado);
+			printf("Perrito encontrado\n");
+			pPerritoBuscado = ll_get(pArrayListPerrito, indexPerrito);
 
-			printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "HORAS TRABAJO", "SUELDO");
-			employee_showEmpleado(pEmpleadoBuscado);
+			printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+			employee_showEmpleado(pPerritoBuscado);
 
-			funciones_imput_pedirYValidarCaracter("Esta seguro que desea eliminar este empleado del sistema? (s: si, n: no)\n", "Error, esta seguro que desea eliminar este empleado del sistema? (s: si, n: no) (ingrese una de las dos letras)\n", respuesta);
+			funciones_imput_pedirYValidarCaracter("Esta seguro que desea eliminar este perrito del sistema? (s: si, n: no)\n", "Error, esta seguro que desea eliminar este perrito del sistema? (s: si, n: no) (ingrese una de las dos letras)\n", respuesta);
 
 			if(*respuesta == 's')
 			{
-				ll_remove(pArrayListEmployee, indexEmpleado);
-				printf("Empleado dado de baja del sistema exitosamente\n");
+				ll_remove(pArrayListPerrito, indexPerrito);
+				printf("Perrito dado de baja del sistema exitosamente\n");
 				retorno = 0;
 			}
 			else
 			{
-				printf("Se ha cancelado la baja del empleado del sistema\n");
+				printf("Se ha cancelado la baja del perrito del sistema\n");
 			}
 		}
 		else
 		{
-			printf("Error, no se ha encontrado ningun empleado con ese id\n");
+			printf("Error, no se ha encontrado ningun perrito con ese id\n");
 		}
 	}
     return retorno;
 }
 
-/** \brief Listar empleados
+/** \brief Listar perritos
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int controller_ListEmployee(LinkedList* pArrayListEmployee)
+int controller_ListPerrito(LinkedList* pArrayListPerrito)
 {
-	int tamArrayEmpleados;
-	tamArrayEmpleados = ll_len(pArrayListEmployee);
+	int tamArrayPerritos;
+	tamArrayPerritos = ll_len(pArrayListPerrito);
 
-	Employee* pEmpleados = NULL;
-	pEmpleados = (Employee*) malloc (sizeof(Employee)*tamArrayEmpleados);
+	perrito* pPerritos = NULL;
+	pPerritos = (perrito*) malloc (sizeof(perrito)*tamArrayPerritos);
 
-	if(pArrayListEmployee != NULL && tamArrayEmpleados > 0)
+	if(pArrayListPerrito != NULL && tamArrayPerritos > 0)
 	{
-		pEmpleados = nexusEmployee_and_Ll_getEmployees(pArrayListEmployee);
+		pPerritos = nexusEmployee_and_Ll_getEmployees(pArrayListPerrito);
 
-		for(int j=0; j<tamArrayEmpleados; j++)
+		for(int j=0; j<tamArrayPerritos; j++)
 		{
 			if(j==0)
 			{
-				printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "HORAS TRABAJO", "SUELDO");
+				printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 			}
-			employee_showEmpleado((pEmpleados + j));
+			perrito_mostrarPerrito((pPerritos + j));
 		}
 	}
 
     return 1;
 }
 
-/** \brief Ordenar empleados
+/** \brief Ordenar perritos
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int controller_sortEmployee(LinkedList* pArrayListEmployee)
+int controller_sortPerritos(LinkedList* pArrayListPerrito)
 {
 	int retorno = 1;
 	int opcion = -1;
@@ -332,16 +332,16 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 
 	int (*funcionQueCompara)(void* this1, void* this2);
 
-	if(pArrayListEmployee != NULL)
+	if(pArrayListPerrito != NULL)
 	{
-		funciones_imput_pedirYValidarEntero("Ingrese opcion de ordenamiento:\n1-Ordenar por ID\n2-Ordenar por nombre\n3-Ordenar por horas trabajadas\n4-Ordenar por sueldo\n", "Error, reongrese opcion de ordenamiento (1-4):\n1-Ordenar por ID\n2-Ordenar por nombre\n3-Ordenar por horas trabajadas\n4-Ordenar por sueldo\n", 1, 4, &opcion);
+		funciones_imput_pedirYValidarEntero("Ingrese opcion de ordenamiento:\n1-Ordenar por ID\n2-Ordenar por nombre\n3-Ordenar por edad\n4-Ordenar por raza\n", "Error, reongrese opcion de ordenamiento (1-4):\n1-Ordenar por ID\n2-Ordenar por nombre\n3-Ordenar por edad\n4-Ordenar por raza\n", 1, 4, &opcion);
 
 		switch(opcion)
 		{
 		case 1:
 			printf("Has elejido la opcion 1-Ordenar por ID\n");
 			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (menor ID a mayor ID)\n2-Ordenar descendentemente (mayor ID a menor ID)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (menor ID a mayor ID)\n2-Ordenar descendentemente (mayor ID a menor ID)\n", 1, 2, &opcionOrden);
-			funcionQueCompara = employee_comparateByID;
+			funcionQueCompara = perrito_comparateByID;
 			switch(opcionOrden)
 			{
 			case 1:
@@ -357,7 +357,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 		case 2:
 			printf("Has elejido la opcion 2-Ordenar por nombre\n");
 			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (A-Z)\n2-Ordenar descendentemente (Z-A)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (A-Z)\n2-Ordenar descendentemente (Z-A)\n", 1, 2, &opcionOrden);
-			funcionQueCompara = employee_comparateByNombre;
+			funcionQueCompara = perrito_comparateByNombre;
 			switch(opcionOrden)
 			{
 			case 1:
@@ -371,33 +371,33 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			}
 			break;
 		case 3:
-			printf("Has elejido la opcion 3-Ordenar por horas trabajadas\n");
-			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (menos horas trabajadas a mas horas trabajadas)\n2-Ordenar descendentemente (mas horas trabajadas a menos horas trabajadas)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (menos horas trabajadas a mas horas trabajadas)\n2-Ordenar descendentemente (mas horas trabajadas a menos horas trabajadas)\n", 1, 2, &opcionOrden);
-			funcionQueCompara = employee_comparateByHorasTrabajadas;
+			printf("Has elejido la opcion 3-Ordenar por edad\n");
+			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (menor edad a mayor edad)\n2-Ordenar descendentemente (mayor edad a menor edad)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (menor edad a mayor edad)\n2-Ordenar descendentemente (mayor edad a menor edad)\n", 1, 2, &opcionOrden);
+			funcionQueCompara = perrito_comparateByEdad;
 			switch(opcionOrden)
 			{
 			case 1:
-				printf("Has elejido la opcion 1-Ordenar por horas trabajadas ascendentemente (menos horas trabajadas a mas horas trabajadas)\n");
+				printf("Has elejido la opcion 1-Ordenar ascendentemente (menor edad a mayor edad)\n");
 				orden = 0;
 				break;
 			case 2:
-				printf("Has elejido la opcion 2-Ordenar por horas trabajadas descendentemente (mas horas trabajadas a menos horas trabajadas)\n");
+				printf("Has elejido la opcion 2-Ordenar descendentemente (mayor edad a menor edad)\n");
 				orden = 1;
 				break;
 			}
 			break;
 		case 4:
-			printf("Has elejido la opcion 4-Ordenar por sueldo\n");
-			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (menor sueldo a mayor sueldo)\n2-Ordenar descendentemente (mayor sueldo a menor sueldo)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (menor sueldo a mayor sueldo)\n2-Ordenar descendentemente (mayor a menor sueldo)\n", 1, 2, &opcionOrden);
-			funcionQueCompara = employee_comparateBySueldo;
+			printf("Has elejido la opcion 4-Ordenar por raza\n");
+			funciones_imput_pedirYValidarEntero("Ingrese modo de ordenar:\n1-Ordenar ascendentemente (raza A-Z)\n2-Ordenar descendentemente (raza Z-A)\n","Error, reingrese modo de ordenar (1 o 2):\n1-Ordenar ascendentemente (raza A-Z)\n2-Ordenar descendentemente (raza Z-A)\n", 1, 2, &opcionOrden);
+			funcionQueCompara = perrito_comparateByRaza;
 			switch(opcionOrden)
 			{
 			case 1:
-				printf("Has elejido la opcion 1-Ordenar por sueldo ascendentemente (menor sueldo a mayor sueldo)\n");
+				printf("Has elejido la opcion 1-Ordenar por raza ascendentemente (A-Z)\n");
 				orden = 0;
 				break;
 			case 2:
-				printf("Has elejido la opcion 2-Ordenar por sueldo descendentemente (mayor sueldo a menor sueldo)\n");
+				printf("Has elejido la opcion 2-Ordenar por raza descendentemente (Z-A)\n");
 				orden = 1;
 				break;
 			}
@@ -405,7 +405,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 		}
 		printf("Ordenando empleados...\nPor favor, espere mientras se ordena: este proceso puede demorar algunos segundos\n");
 
-		ll_sort(pArrayListEmployee, funcionQueCompara, orden);
+		ll_sort(pArrayListPerrito, funcionQueCompara, orden);
 		printf("Empleados ordenados con exito\n");
 		retorno = 0;
 	}
@@ -413,21 +413,21 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     return retorno;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
+/** \brief Guarda los datos de los perritos en el archivo data.csv (modo texto).
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
+int controller_saveAsText(char* path , LinkedList* pArrayListPerrito)
 {
 	FILE* pFile = NULL;
 	pFile = fopen(path, "w");
 
 	if(pFile != NULL)
 	{
-		fprintf(pFile,"%s,%s,%s,%s\n", "id", "nombre", "horasTrabajadas", "sueldo");
+		fprintf(pFile,"%s,%s,%s,%s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 		fclose(pFile);
 	}
 
@@ -436,20 +436,20 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 	int i;
 	int tamLinkedList;
 
-	if(pFile1 != NULL && pArrayListEmployee != NULL)
+	if(pFile1 != NULL && pArrayListPerrito != NULL)
 	{
 
-		tamLinkedList = ll_len(pArrayListEmployee);
+		tamLinkedList = ll_len(pArrayListPerrito);
 
 		for(i=0; i<tamLinkedList; i++)
 		{
-			Employee* pEmpleado = ll_get(pArrayListEmployee, i);
+			perrito* pPerrito = ll_get(pArrayListPerrito, i);
 
-			if(pEmpleado != NULL)
+			if(pPerrito != NULL)
 			{
-				fprintf(pFile,"%d,%s,%d,%d\n", pEmpleado->id, pEmpleado->nombre, pEmpleado->horasTrabajadas, pEmpleado->sueldo);
+				fprintf(pFile,"%d,%s,%d,%s\n", pPerrito->id, pPerrito->nombre, pPerrito->edad, pPerrito->raza);
 			}
-			pEmpleado = NULL;
+			pPerrito = NULL;
 
 		}
 		fclose(pFile1);
@@ -458,14 +458,14 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
     return 1;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
+/** \brief Guarda los datos de los perritos en el archivo data.csv (modo binario).
  *
  * \param path char*
- * \param pArrayListEmployee LinkedList*
+ * \param pArrayListPerrito LinkedList*
  * \return int
  *
  */
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
+int controller_saveAsBinary(char* path , LinkedList* pArrayListPerrito)
 {
 	int retorno = 1;
 
@@ -474,20 +474,20 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 
 	int tamLinkedList;
 
-	if(pFile != NULL && pArrayListEmployee != NULL)
+	if(pFile != NULL && pArrayListPerrito != NULL)
 	{
-		tamLinkedList = ll_len(pArrayListEmployee);
+		tamLinkedList = ll_len(pArrayListPerrito);
 
 		for(int i=0; i<tamLinkedList; i++)
 		{
-			Employee* pEmpleado = ll_get(pArrayListEmployee, i);
+			perrito* pPerrito = ll_get(pArrayListPerrito, i);
 
-			if(pEmpleado != NULL)
+			if(pPerrito != NULL)
 			{
-				fwrite(pEmpleado, sizeof(Employee), 1, pFile);
+				fwrite(pPerrito, sizeof(perrito), 1, pFile);
 				retorno = 0;
 			}
-			pEmpleado = NULL;
+			pPerrito = NULL;
 
 		}
 		fclose(pFile);
