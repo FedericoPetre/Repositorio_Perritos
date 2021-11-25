@@ -103,8 +103,7 @@ int controller_addPerrito(LinkedList* pArrayListPerrito)
 		funciones_imput_pedirYValidarCadena("Ingrese raza del nuevo perrito\n", "Error, reingrese raza del nuevo perrito (solo letras, espacios o guiones)\n", 127, razaPerrito);
 
 		pNuevoPerrito = perrito_nuevoParametros(nuevoIDTransformado, nombrePerrito, edadTransformada, razaPerrito);
-
-		printf("Mostrando nuevo perrito:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+		printf("Mostrando nuevo perrito:\n%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 		perrito_mostrarPerrito(pNuevoPerrito);
 		funciones_imput_pedirYValidarCaracter("Desea agregar este perrito al sistema? (s: si, n: no)\n", "Error, esta seguro de agregar este perrito al sistema? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
 		if(*letraRespuesta == 's')
@@ -151,8 +150,8 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 		{
 			perrito* pPerrito = ll_get(pArrayListPerrito, indexPerrito);
 			printf("Se encontro el perrito\nMostrando datos...\n");
-			printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
-			perrito_mostrarPerrito(pPerritoAux);
+			printf("%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+			perrito_mostrarPerrito(pPerrito);
 			perrito_setId(pPerritoAux,*pNumeroPedido);
 			perrito_setNombre(pPerritoAux, pPerrito->nombre);
 			perrito_setEdad(pPerritoAux, pPerrito->edad);
@@ -166,7 +165,7 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 				printf("Elejiste modificar nombre\n");
 				funciones_imput_pedirYValidarCadena("Ingrese nuevo nombre\n", "Error, reingrese nuevo nombre (letras, espacios y guiones solamente)\n", 128, nombreAux);
 				perrito_setNombre(pPerritoAux, nombreAux);
-				printf("Mostrando Datos modificados:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+				printf("Mostrando Datos modificados:\n%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 				perrito_mostrarPerrito(pPerritoAux);
 				funciones_imput_pedirYValidarCaracter("Desea guardar la modificacion? (s: si, n: no)\n", "Error, desea guardar la modificacion anterior al perrito? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
 				if(*letraRespuesta == 's')
@@ -184,7 +183,7 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 				printf("Elejiste modificar edad del perrito\n");
 				funciones_imput_pedirYValidarEntero("Ingrese nueva edad del perrito (min: 0 max: 50)\n","Error. reingrese nueva edad (min: 0 max: 50)\n", 0, 50, edadAux);
 				perrito_setEdad(pPerritoAux,*edadAux);
-				printf("Mostrando Datos modificados:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+				printf("Mostrando Datos modificados:\n%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 				perrito_mostrarPerrito(pPerritoAux);
 				funciones_imput_pedirYValidarCaracter("Desea guardar la modificacion? (s: si, n: no)\n", "Error, desea guardar la modificacion anterior al perrito? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
 				if(*letraRespuesta == 's')
@@ -203,7 +202,7 @@ int controller_editPerrito(LinkedList* pArrayListPerrito)
 				printf("Elejiste modificar raza\n");
 				funciones_imput_pedirYValidarCadena("Ingrese nueva raza\n", "Error, reingrese nueva raza (letras, espacios y guiones solamente)\n", 128, razaAux);
 				perrito_setRaza(pPerritoAux, razaAux);
-				printf("Mostrando Datos modificados:\n%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+				printf("Mostrando Datos modificados:\n%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 				perrito_mostrarPerrito(pPerritoAux);
 				funciones_imput_pedirYValidarCaracter("Desea guardar la modificacion? (s: si, n: no)\n", "Error, desea guardar la modificacion anterior al perrito? (s: si, n: no) (ingrese una de las dos letras)\n", letraRespuesta);
 				if(*letraRespuesta == 's')
@@ -260,7 +259,7 @@ int controller_removePerrito(LinkedList* pArrayListPerrito)
 			printf("Perrito encontrado\n");
 			pPerritoBuscado = ll_get(pArrayListPerrito, indexPerrito);
 
-			printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+			printf("%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 			perrito_mostrarPerrito(pPerritoBuscado);
 
 			funciones_imput_pedirYValidarCaracter("Esta seguro que desea eliminar este perrito del sistema? (s: si, n: no)\n", "Error, esta seguro que desea eliminar este perrito del sistema? (s: si, n: no) (ingrese una de las dos letras)\n", respuesta);
@@ -307,7 +306,7 @@ int controller_ListPerrito(LinkedList* pArrayListPerrito)
 		{
 			if(j==0)
 			{
-				printf("%-5s %-12s %-16s %-9s\n", "ID", "NOMBRE", "EDAD", "RAZA");
+				printf("%-5s %-12s %-10s %-12s\n", "ID", "NOMBRE", "EDAD", "RAZA");
 			}
 			perrito_mostrarPerrito((pPerritos + j));
 		}
@@ -403,10 +402,10 @@ int controller_sortPerritos(LinkedList* pArrayListPerrito)
 			}
 			break;
 		}
-		printf("Ordenando empleados...\nPor favor, espere mientras se ordena: este proceso puede demorar algunos segundos\n");
+		printf("Ordenando perritos...\nPor favor, espere mientras se ordena: este proceso puede demorar algunos segundos\n");
 
 		ll_sort(pArrayListPerrito, funcionQueCompara, orden);
-		printf("Empleados ordenados con exito\n");
+		printf("Perritos ordenados con exito\n");
 		retorno = 0;
 	}
 
@@ -425,24 +424,21 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPerrito)
 	FILE* pFile = NULL;
 	pFile = fopen(path, "w");
 
-	if(pFile != NULL)
-	{
-		fprintf(pFile,"%s,%s,%s,%s\n", "ID", "NOMBRE", "EDAD", "RAZA");
-		fclose(pFile);
-	}
-
-	FILE* pFile1 = NULL;
-	pFile1 = fopen(path, "a");
 	int i;
 	int tamLinkedList;
 
-	if(pFile1 != NULL && pArrayListPerrito != NULL)
+	if(pFile != NULL && pArrayListPerrito != NULL)
 	{
 
 		tamLinkedList = ll_len(pArrayListPerrito);
 
 		for(i=0; i<tamLinkedList; i++)
 		{
+			if(i==0)
+			{
+				fprintf(pFile,"%s,%s,%s,%s\n", "id", "nombre", "edad", "raza");
+			}
+
 			perrito* pPerrito = ll_get(pArrayListPerrito, i);
 
 			if(pPerrito != NULL)
@@ -452,7 +448,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPerrito)
 			pPerrito = NULL;
 
 		}
-		fclose(pFile1);
+		fclose(pFile);
 		printf("El archivo fue guardado exitosamente\n");
 	}
     return 1;

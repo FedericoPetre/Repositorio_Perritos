@@ -1,8 +1,8 @@
-ID,NOMBRE,EDAD,RAZA
-3,Jade,7,Galgo
+id,nombre,edad,raza
+6,Naia,2,Golden
 1,Juan,5,Bulldog frances
 2,Lobo,6,Caniche
-6,Naia,2,Golden
-4,Oli,8,Labrador
 7,Ori,6,Pitbull
+3,Jade,7,Caniche toy
+4,Oli,8,Labrador
 5,Ra,9,Pitbull
