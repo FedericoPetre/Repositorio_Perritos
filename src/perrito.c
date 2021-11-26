@@ -73,7 +73,7 @@ perrito* perrito_nuevoParametros(char* id,char* nombre,char* edad, char* raza)
 		}
 		else
 		{
-			printf("Error al cargar el sueldo al nuevo empleado\n");
+			printf("Error al cargar la edad al nuevo perrito\n");
 		}
 
 		if(idTransformado != -1)
